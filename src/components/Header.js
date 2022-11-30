@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
 import { selectCars } from '../features/car/carSlice';
 import { useSelector } from 'react-redux';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faClose,
+  faBars
+} from "@fortawesome/free-solid-svg-icons";
 
 function Header() {
   const [burgerStatus, setBurgerStatus] = useState();
@@ -22,11 +25,19 @@ function Header() {
         <RightMenu>
             <a href="/">Shop</a>
             <a href="/">Account</a>
-            <CustomMenu onClick={() => setBurgerStatus(true)} />
+            <FontAwesomeIcon 
+                icon={faBars} 
+                style={{cursor: 'pointer'}} 
+                onClick={() => setBurgerStatus(true)} 
+            />
         </RightMenu>
         <BurgerNav show={burgerStatus}>
             <CloseWrapper>
-                <CustomClose onClick={() => setBurgerStatus(false)} />
+                <FontAwesomeIcon 
+                    icon={faClose} 
+                    style={{cursor: 'pointer'}} 
+                    onClick={() => setBurgerStatus(false)}
+                />
             </CloseWrapper>
             {cars && cars.map((car, index) => (
                 <li key={index}><a href="/">{car}</a></li>
@@ -85,10 +96,6 @@ const RightMenu = styled.div`
     }
 `
 
-const CustomMenu = styled(MenuIcon)`
-    cursor: pointer;
-`
-
 const BurgerNav = styled.div`
     position: fixed;
     top: 0;
@@ -113,10 +120,6 @@ const BurgerNav = styled.div`
 
         }
     }
-`
-
-const CustomClose = styled(CloseIcon)`
-    cursor: pointer;
 `
 
 const CloseWrapper = styled.div`
