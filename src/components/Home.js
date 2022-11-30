@@ -1,29 +1,21 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React from 'react'
 import styled from 'styled-components'
+import useDynamicContentParent from '../hooks/useDynamicContentParent'
+import useScrollToNextSectionParent from '../hooks/useScrollToNextSectionParent'
 import Section from './Section'
 
 function Home() {
-  const [content, setContent] = useState({
+
+  const initialContent = {
     title: "Model S",
     description: "Order Online for Touchless Delivery",
     leftBtnText: "Custom order",
     rightBtnText: "Existing inventory",
-  });
+  }
 
-  const [opacity, setOpacity] = useState(100);
+  const { content, setContent, opacity, setOpacity } = useDynamicContentParent(initialContent)
 
-  const [sectionsInView, setSectionsInView] = useState([])
-  const lastSection = useRef()
-
-  useEffect(() => {
-    lastSection.current = sectionsInView[sectionsInView.length - 1]?.current
-    setTimeout(() => {
-      if ( lastSection.current && sectionsInView.length > 0 ) {
-        lastSection['current'].scrollIntoView()
-        setSectionsInView([])
-      }
-    }, 900)
-  }, [sectionsInView, setSectionsInView])
+  const { setSectionsInView } = useScrollToNextSectionParent()
 
   return (
     <Container>
