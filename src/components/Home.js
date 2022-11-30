@@ -146,6 +146,7 @@ const ButtonGroup = styled.div`
     };
     width: 100vw;
     justify-content: center;
+    align-items: center;
 `
 
 const LeftButton = styled.div`
@@ -164,6 +165,9 @@ const LeftButton = styled.div`
     font-size: 12px;
     cursor: pointer;
     margin: 8px;
+    @media (max-width: 599px) {
+      width: 90vw;
+  };
 
 `
 
